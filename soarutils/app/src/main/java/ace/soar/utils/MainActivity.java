@@ -5,16 +5,27 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import ace.soar.frame.utils.machine.BaseStatesMachine;
+import ace.soar.frame.utils.machine.UIUpdateInter;
 
 public class MainActivity extends AppCompatActivity {
+
+    private TextView tip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        tip = (TextView)findViewById(R.id.tip);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -26,6 +37,66 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        final BaseStatesMachine machine = new BaseStatesMachine("test");
+        List<BaseStatesMachine.BaseState> list = new ArrayList<>();
+        list.add(machine.new BaseState(1));
+        list.add(machine.new BaseState(2));
+        list.add(machine.new BaseState(3));
+        list.add(machine.new BaseState(4));
+        machine.setStatesData(list);
+        machine.setUIUpdateInter(new UIUpdateInter() {
+            @Override
+            public void updateUIByStatus(int state) {
+                switch (state) {
+                    case 1:
+
+                        Log.e("soar", "state -- -1");
+                        break;
+                    case 2:
+                        Log.e("soar", "state -- -2");
+                        break;
+                    case 3:
+                        Log.e("soar", "state -- -3");
+                        break;
+                    case 4:
+                        Log.e("soar", "state -- -4");
+                        break;
+                }
+            }
+        });
+        machine.start();
+
+
+        tip.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                machine.changeToState(1);
+            }
+        }, 5000);
+
+        tip.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                machine.changeToState(2);
+            }
+        },10000);
+
+        tip.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                machine.changeToState(3);
+            }
+        },15000);
+
+        tip.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                machine.changeToState(4);
+            }
+        },20000);
+
+
     }
 
     @Override
