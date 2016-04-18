@@ -19,13 +19,24 @@ import ace.soar.frame.utils.machine.UIUpdateInter;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView tip;
+    private final static int STATE_1 = 1;
+    private final static int STATE_2 = 2;
+    private final static int STATE_3 = 3;
+    private final static int STATE_4 = 4;
+
+    private TextView state1,state2,state3,state4,state5 ,state;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        tip = (TextView)findViewById(R.id.tip);
+        state1 = (TextView)findViewById(R.id.state1);
+        state2 = (TextView)findViewById(R.id.state2);
+        state3 = (TextView)findViewById(R.id.state3);
+        state4 = (TextView)findViewById(R.id.state4);
+        state5 = (TextView)findViewById(R.id.state5);
+        state = (TextView)findViewById(R.id.state);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -40,61 +51,79 @@ public class MainActivity extends AppCompatActivity {
 
         final BaseStatesMachine machine = new BaseStatesMachine("test");
         List<BaseStatesMachine.BaseState> list = new ArrayList<>();
-        list.add(machine.new BaseState(1));
-        list.add(machine.new BaseState(2));
-        list.add(machine.new BaseState(3));
-        list.add(machine.new BaseState(4));
+        list.add(machine.new BaseState(STATE_1));
+        list.add(machine.new BaseState(STATE_2));
+        list.add(machine.new BaseState(STATE_3));
+        list.add(machine.new BaseState(STATE_4));
         machine.setStatesData(list);
         machine.setUIUpdateInter(new UIUpdateInter() {
             @Override
-            public void updateUIByStatus(int state) {
-                switch (state) {
-                    case 1:
+            public void updateUIByStatus(final int states) {
+                Log.e("soar", "get  cureent state === " + machine.getLocalCurrentState());
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        switch (states) {
+                            case STATE_1:
+                                state.setText("state ---- " + STATE_1);
+                                break;
+                            case STATE_2:
+                                state.setText("state ---- " + STATE_2);
+                                break;
+                            case STATE_3:
+                                state.setText("state ---- " + STATE_3);
+                                break;
+                            case STATE_4:
+                                state.setText("state ---- " + STATE_4);
+                                break;
+                        }
 
-                        Log.e("soar", "state -- -1");
-                        break;
-                    case 2:
-                        Log.e("soar", "state -- -2");
-                        break;
-                    case 3:
-                        Log.e("soar", "state -- -3");
-                        break;
-                    case 4:
-                        Log.e("soar", "state -- -4");
-                        break;
-                }
+
+                    }
+                });
+
             }
         });
         machine.start();
 
 
-        tip.postDelayed(new Runnable() {
+        state1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void run() {
-                machine.changeToState(1);
-            }
-        }, 5000);
+            public void onClick(View v) {
 
-        tip.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                machine.changeToState(2);
+                machine.changeToState(STATE_1);
             }
-        },10000);
+        });
 
-        tip.postDelayed(new Runnable() {
+        state2.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void run() {
-                machine.changeToState(3);
+            public void onClick(View v) {
+                machine.changeToState(STATE_2);
             }
-        },15000);
+        });
 
-        tip.postDelayed(new Runnable() {
+        state3.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void run() {
-                machine.changeToState(4);
+            public void onClick(View v) {
+                machine.changeToState(STATE_3);
             }
-        },20000);
+        });
+
+        state4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                machine.changeToState(STATE_4);
+            }
+        });
+
+        state5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                machine.changeToState(STATE_3);
+            }
+        });
+
+
 
 
     }

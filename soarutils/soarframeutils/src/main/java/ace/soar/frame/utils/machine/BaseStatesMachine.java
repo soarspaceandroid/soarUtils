@@ -1,7 +1,6 @@
 package ace.soar.frame.utils.machine;
 
 import android.os.Message;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,7 +30,6 @@ public class BaseStatesMachine extends StateMachine{
     public void setStatesData(List<BaseState> stateList){
         this. mStateList =stateList;
         mDefaultState = mStateList.get(0);
-        Log.e("soar" , "set date'");
         for (int x = 0 ;x < mStateList.size() ; x++){
             if(x == 0){
                 addState(mStateList.get(x) , null);
@@ -41,7 +39,6 @@ public class BaseStatesMachine extends StateMachine{
 
             mStateFlag.put(x, mStateList.get(x).getFlag());
         }
-        Log.e("soar" , "set date111");
         setInitialState(mDefaultState);
     }
 
@@ -59,7 +56,6 @@ public class BaseStatesMachine extends StateMachine{
      * @param state
      */
     private void notifyUI(int state){
-        Log.e("soar" ,"notifay -- "+state);
         mInter.updateUIByStatus(state);
     }
 
@@ -75,6 +71,15 @@ public class BaseStatesMachine extends StateMachine{
             }
         }
 
+    }
+
+    /**
+     * get cureent state
+     * @return
+     */
+    public int getLocalCurrentState(){
+        IState state = getCurrentState();
+        return Integer.parseInt(state.getName());
     }
 
     /**
@@ -100,9 +105,13 @@ public class BaseStatesMachine extends StateMachine{
 
         @Override
         public boolean processMessage(Message msg) {
-            Log.e("soar" , "process --- "+msg.what);
             transitionTo(mStateList.get(msg.what));
             return super.processMessage(msg);
+        }
+
+        @Override
+        public String getName() {
+            return flag+"";
         }
     }
 
