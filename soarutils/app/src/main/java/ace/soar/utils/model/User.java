@@ -1,7 +1,6 @@
 package ace.soar.utils.model;
 
 import ace.soar.frame.utils.model.BaseModel;
-import ace.soar.frame.utils.observer.DataObserable;
 import ace.soar.frame.utils.observer.DataObserver;
 
 /**

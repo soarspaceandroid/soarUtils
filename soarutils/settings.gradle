@@ -1,1 +1,1 @@
-include ':app', ':xutils', ':soarframeutils'
+include ':app', ':xutils', ':soarframeutils', ':corelibrary'
