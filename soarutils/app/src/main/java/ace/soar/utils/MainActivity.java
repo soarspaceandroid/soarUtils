@@ -16,6 +16,9 @@ import java.util.List;
 
 import ace.soar.frame.utils.machine.BaseStatesMachine;
 import ace.soar.frame.utils.machine.UIUpdateInter;
+import ace.soar.frame.utils.observer.DataChangeListener;
+import ace.soar.frame.utils.observer.DataObserver;
+import ace.soar.utils.model.User;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -123,6 +126,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        //test observer
+        DataObserver observer = new DataObserver(new DataChangeListener<User>(){
+            @Override
+            public void dataChanged(User user) {
+                Log.e("soar" , "data chagne "+user.getName() +"   "+user.getAge());
+            }
+        });
+        User user = new User(observer ,10 , "test");
+        user.setAge(11);
+        user.setName("soar");
 
 
 
