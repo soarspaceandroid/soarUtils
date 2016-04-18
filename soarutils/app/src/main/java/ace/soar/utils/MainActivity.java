@@ -19,10 +19,10 @@ import ace.soar.frame.utils.machine.UIUpdateInter;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final static int STATE_1 = 1;
-    private final static int STATE_2 = 2;
-    private final static int STATE_3 = 3;
-    private final static int STATE_4 = 4;
+        private final static int STATE_1 = 1;
+        private final static int STATE_2 = 2;
+        private final static int STATE_3 = 3;
+        private final static int STATE_4 = 4;
 
     private TextView state1,state2,state3,state4,state5 ,state;
 

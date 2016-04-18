@@ -3,6 +3,12 @@
 
 使用: 
 
+        private final static int STATE_1 = 1;
+        private final static int STATE_2 = 2;
+        private final static int STATE_3 = 3;
+        private final static int STATE_4 = 4;
+	
+
         final BaseStatesMachine machine = new BaseStatesMachine("test");
         List<BaseStatesMachine.BaseState> list = new ArrayList<>();
         list.add(machine.new BaseState(STATE_1));
@@ -39,6 +45,8 @@
             }
         });
         machine.start();
+	//切换到该状态
+	machine.changeToState(STATE_2);
 
 
 项目中还包含 xUtils , 正在学习使用中
