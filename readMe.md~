@@ -6,7 +6,8 @@
         private final static int STATE_1 = 1;
         private final static int STATE_2 = 2;
         private final static int STATE_3 = 3;
-        private final static int STATE_4 = 4;	
+        private final static int STATE_4 = 4;
+	
 
         final BaseStatesMachine machine = new BaseStatesMachine("test");
         List<BaseStatesMachine.BaseState> list = new ArrayList<>();

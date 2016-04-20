@@ -48,5 +48,7 @@
 	//切换到该状态
 	machine.changeToState(STATE_2);
 
+.......................
+
 
 项目中还包含 xUtils , 正在学习使用中
