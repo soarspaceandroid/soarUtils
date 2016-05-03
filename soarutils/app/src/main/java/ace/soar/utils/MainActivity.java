@@ -12,20 +12,27 @@ import android.view.View;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import ace.soar.frame.utils.db.DBUtils;
 import ace.soar.frame.utils.machine.BaseStatesMachine;
 import ace.soar.frame.utils.machine.UIUpdateInter;
+import ace.soar.frame.utils.net.HttpUtils;
+import ace.soar.frame.utils.net.RequestListener;
 import ace.soar.frame.utils.observer.DataChangeListener;
 import ace.soar.frame.utils.observer.DataObserver;
+import ace.soar.utils.model.FoodBean;
 import ace.soar.utils.model.User;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements RequestListener<FoodBean>{
 
         private final static int STATE_1 = 1;
         private final static int STATE_2 = 2;
         private final static int STATE_3 = 3;
         private final static int STATE_4 = 4;
+
 
     private TextView state1,state2,state3,state4,state5 ,state;
 
@@ -139,6 +146,11 @@ public class MainActivity extends AppCompatActivity {
         user.setName("soar");
 
 
+        Map<String , Object> map = new HashMap<>();
+        map.put("name", "黄豆猪脚汤");
+        HttpUtils.request(map,HttpUtils.REQUEST_GET ,this , FoodBean.class);
+
+
 
     }
 
@@ -162,5 +174,36 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void requestSuccess(FoodBean foodBean) {
+
+        try {
+            DBUtils.getDbManager().saveOrUpdate(foodBean.tngou);
+        }catch (Exception e){
+
+        }
+        Log.e("soar" , "get reso--- "+foodBean.tngou.get(0).img);
+
+        try {
+            Thread.sleep(10000);
+        }catch (Exception e){
+
+        }
+
+        try {
+            List<FoodBean.TngouBean> list = DBUtils.getDbManager().selector(FoodBean.TngouBean.class).findAll();
+            Log.e("soar" ,  " list --- "+list.size()+"    "+list.get(1).img);
+        }catch (Exception e){
+
+        }
+
+
+    }
+
+    @Override
+    public void requestFail(int code, String msg, String result) {
+        Log.e("soar" , "get eroor--- "+msg);
     }
 }

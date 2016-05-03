@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#00000000</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorProgressBack">#20000000</color>
+    <color name="colorProgressBacksolid">#aaa7c0dc</color>
+    <color name="color_999999">#999999</color>
+    <color name="color_539728">#539728</color>
+    <color name="color_e7343a">#e7343a</color>
+    <color name="white">#ffffff</color>
+    <color name="menu_fragment_background">#B3000000</color>
+    <color name="menu_item_background">#f2f2f2</color>
+    <color name="divider_color">#b5b5b5</color>
+    <color name="color_message_back">#FF0000</color>
+    <color name="color_message_solid">#0000FF</color>
+    <color name="color_count">#FFFFFF</color>
+    <color name="item_tab_select_bg">#0000FF</color>
+    <color name="item_tab_bg">#ff00ff</color>
+    <color name="item_tabtext_bg">#ffff00</color>
+    <!---pull  to refresh begin-->
+    <color name="black">#000000</color>
+    <color name="gray">#AAAA</color>
+    <!---pull  to refresh end-->
+    <color name="background_tab_pressed">#00000000</color>
+    <color name="color_2f2f2f">#2f2f2f</color>
+    <color name="color_dddddd">#dddddd</color>
+    <color name="pop_back">#77000000</color>
+
+
+
+</resources>
